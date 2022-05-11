@@ -7,6 +7,7 @@ This repository was created for the purposes of Software Engineering in Practice
 ## Modules
 
 - [Histogram Generator](./gradeshistogram/)
+- [Unit Testing](./unittesting/)
 
 ## Author
 
