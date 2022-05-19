@@ -31,10 +31,11 @@ public class FileIOTest {
     @Test
     public void test_readFile_invalidNumbers() {
         String filepath = resourcePath.concat("numbers_invalid.txt");
-        thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("Input file does not contain only integers");
+        int[] expectedNumbers = new int[] {
+            7, 2, 9, 7, 2, 9
+        };
     
-        fileIO.readFile(filepath);
+        Assert.assertArrayEquals(expectedNumbers, fileIO.readFile(filepath));
     }
 
     @Test

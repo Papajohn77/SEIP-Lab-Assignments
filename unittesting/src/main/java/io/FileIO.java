@@ -20,7 +20,6 @@ public class FileIO {
 	 * @return an array of numbers
 	 * @exception IllegalArgumentException when the given file does not exist
 	 * @exception IllegalArgumentException when the given file is empty
-	 * @exception IllegalArgumentException when the given file does not contain only integers
 	 */
 	public int[] readFile(String filepath) {
 		File file = new File(filepath);
@@ -33,16 +32,17 @@ public class FileIO {
 		) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				numbersList.add(Integer.parseInt(line));
+				try {
+					numbersList.add(Integer.parseInt(line));
+				} catch (NumberFormatException e) {
+					// Ignore non integer line
+				}
 			}
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(
-				"Input file does not contain only integers");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		if (numbersList.size() == 0)
+		if (numbersList.isEmpty())
 			throw new IllegalArgumentException("Input file is empty");
 
 		return numbersList.stream().mapToInt(i -> i).toArray();
