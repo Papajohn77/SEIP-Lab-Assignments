@@ -9,6 +9,10 @@ This repository was created for the purposes of Software Engineering in Practice
 - [Histogram Generator](./gradeshistogram/)
 - [Unit Testing](./unittesting/)
 
+## Test Coverage Report
+
+The test coverage report for the last commit can be found [here](https://papajohn77.github.io/SEIP-Lab-Assignments/).
+
 ## Author
 
 - Ioannis Papadatos
