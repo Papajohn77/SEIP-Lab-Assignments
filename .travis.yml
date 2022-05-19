@@ -10,3 +10,13 @@ branches:
 
 script:
   - mvn clean package
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: unittesting/target/site/jacoco
+  on:
+    branch:
+      - master
+      - development
