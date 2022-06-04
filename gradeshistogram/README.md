@@ -17,7 +17,7 @@ A simple Maven project that takes as an argument the path to a file containing g
 
 - #### Change Directory
 
-  `cd SEIP-Lab-Assignments/seip2022_practical_assignments`
+  `cd SEIP-Lab-Assignments`
 
 - #### Build
 
