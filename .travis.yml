@@ -15,7 +15,7 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: unittesting/target/site/jacoco
+  local_dir: coverage/target/site/jacoco-aggregate
   on:
     branch:
       - master
