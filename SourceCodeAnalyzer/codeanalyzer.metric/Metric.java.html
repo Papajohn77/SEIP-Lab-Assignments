@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Metric.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Coverage Aggregator</a> &gt; <a href="../index.html" class="el_bundle">SourceCodeAnalyzer</a> &gt; <a href="index.source.html" class="el_package">codeanalyzer.metric</a> &gt; <span class="el_source">Metric.java</span></div><h1>Metric.java</h1><pre class="source lang-java linenums">package codeanalyzer.metric;
+
+import codeanalyzer.reader.SourceFileReader;
+
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
+import java.io.IOException;
+
+
+public abstract class Metric {
+    protected String label;
+    protected SourceFileReader fileReader;
+
+<span class="fc" id="L17">	protected Metric(String label, SourceFileReader fileReader) {</span>
+<span class="fc" id="L18">		this.label = label;</span>
+<span class="fc" id="L19">		this.fileReader = fileReader;</span>
+<span class="fc" id="L20">	}</span>
+
+	public String getLabel() {
+<span class="fc" id="L23">		return label;</span>
+	}
+
+    public abstract int calculateWithRegex(String filepath) throws IOException;
+    public abstract int calculateWithStringComparison(String filepath) throws IOException;
+
+    public int regexCalculator(String sourceCode, String regex) {
+<span class="fc" id="L30">		Pattern pattern = Pattern.compile(regex);</span>
+<span class="fc" id="L31">		Matcher matcher = pattern.matcher(sourceCode);</span>
+
+<span class="fc" id="L33">		int count = 0;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">		while (matcher.find()) {</span>
+<span class="fc" id="L35">			count++;</span>
+		}
+<span class="fc" id="L37">		return count;</span>
+	}
+
+    public int strcompCalculator(List&lt;String&gt; sourceCodeList, Predicate&lt;String&gt; condition) {
+<span class="fc" id="L41">		int count = 0;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">		for (String line : sourceCodeList) {</span>
+<span class="fc" id="L43">			line = line.strip();</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">			if (condition.test(line)) {</span>
+<span class="fc" id="L45">				count++;</span>
+			}
+<span class="fc" id="L47">		}</span>
+<span class="fc" id="L48">		return count;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

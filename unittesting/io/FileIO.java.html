@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>FileIO.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Coverage Aggregator</a> &gt; <a href="../index.html" class="el_bundle">unittesting</a> &gt; <a href="index.source.html" class="el_package">io</a> &gt; <span class="el_source">FileIO.java</span></div><h1>FileIO.java</h1><pre class="source lang-java linenums">package io;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+* The FileIO provides simple file input/output operations
+* that serve as hands-on practice on Unit Testing.
+*/
+<span class="fc" id="L14">public class FileIO {</span>
+
+	/**
+	 * Reads a file that contains numbers line by line 
+	 * and returns an array of the integers found in the file.
+	 * @param filepath the file that contains the numbers
+	 * @return an array of numbers
+	 * @exception IllegalArgumentException when the given file does not exist
+	 * @exception IllegalArgumentException when the given file is empty
+	 */
+	public int[] readFile(String filepath) {
+<span class="fc" id="L25">		File file = new File(filepath);</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">		if (!file.exists()) </span>
+<span class="fc" id="L27">			throw new IllegalArgumentException(&quot;Input file does not exist&quot;);</span>
+
+<span class="fc" id="L29">		List&lt;Integer&gt; numbersList = new ArrayList&lt;&gt;();</span>
+		try (
+<span class="fc" id="L31">			BufferedReader reader = new BufferedReader(new FileReader(file))</span>
+		) {
+			String line;
+<span class="fc bfc" id="L34" title="All 2 branches covered.">			while ((line = reader.readLine()) != null) {</span>
+				try {
+<span class="fc" id="L36">					numbersList.add(Integer.parseInt(line));</span>
+<span class="fc" id="L37">				} catch (NumberFormatException e) {</span>
+					// Ignore non integer line
+<span class="fc" id="L39">				}</span>
+			}
+<span class="nc" id="L41">		} catch (IOException e) {</span>
+<span class="nc" id="L42">			e.printStackTrace();</span>
+<span class="fc" id="L43">		}</span>
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">		if (numbersList.isEmpty())</span>
+<span class="fc" id="L46">			throw new IllegalArgumentException(&quot;Input file is empty&quot;);</span>
+
+<span class="fc" id="L48">		return numbersList.stream().mapToInt(i -&gt; i).toArray();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>ArrayOperations.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Coverage Aggregator</a> &gt; <a href="../index.html" class="el_bundle">unittesting</a> &gt; <a href="index.source.html" class="el_package">math</a> &gt; <span class="el_source">ArrayOperations.java</span></div><h1>ArrayOperations.java</h1><pre class="source lang-java linenums">package math;
+
+import io.FileIO;
+
+import java.util.List;
+import java.util.ArrayList;
+
+/**
+* The ArrayOperations provides simple array operations
+* that serve as hands-on practice on Unit Testing.
+*/
+<span class="fc" id="L12">public class ArrayOperations {</span>
+
+    /**
+     * Iterates over an array of integers, which is created by
+     * the numbers contained in the file located at the provided
+     * filepath. At each iteration if the number is prime it is
+     * included in the result, otherwise it is ignored.
+     * @param filepath the file that contains the numbers
+     * @param fileIO an instance of the FileIO Class
+     * @param myMath an instance of the MyMath Class
+     * @return an array of prime numbers
+     */
+    public int[] findPrimesInFile(String filepath, FileIO fileIO, MyMath myMath)  {
+<span class="fc" id="L25">        List&lt;Integer&gt; primeNumbers = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L27">        int[] numbers = fileIO.readFile(filepath);</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int number : numbers) {</span>
+            try {
+<span class="fc bfc" id="L30" title="All 2 branches covered.">                if (myMath.isPrime(number)) {</span>
+<span class="fc" id="L31">                    primeNumbers.add(number);</span>
+                }
+<span class="fc" id="L33">            } catch (IllegalArgumentException e) {</span>
+                // Ignore integer &lt; 2 (not prime)
+<span class="fc" id="L35">            }</span>
+        }
+<span class="fc" id="L37">        return primeNumbers.stream().mapToInt(i -&gt; i).toArray();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

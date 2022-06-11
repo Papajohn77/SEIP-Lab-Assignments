@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>Facade.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Coverage Aggregator</a> &gt; <a href="../index.html" class="el_bundle">SourceCodeAnalyzer</a> &gt; <a href="index.source.html" class="el_package">codeanalyzer</a> &gt; <span class="el_source">Facade.java</span></div><h1>Facade.java</h1><pre class="source lang-java linenums">package codeanalyzer;
+
+import codeanalyzer.analyzer.AnalyzingMethod;
+import codeanalyzer.analyzer.SourceCodeAnalyzer;
+import codeanalyzer.analyzer.SourceCodeAnalyzerFactory;
+import codeanalyzer.exporter.FileType;
+import codeanalyzer.exporter.MetricsExporter;
+import codeanalyzer.exporter.MetricsExporterFactory;
+import codeanalyzer.reader.SourceFileReader;
+import codeanalyzer.reader.SourceFileReaderFactory;
+import codeanalyzer.reader.SourceFileLocation;
+
+import java.util.Map;
+
+import java.io.IOException;
+
+
+<span class="fc" id="L18">public class Facade {</span>
+
+    public void exportSourceCodeMetrics(
+        String filepath,
+        String sourceCodeAnalyzerType,
+        String sourceFileLocation,
+        String outputFilePath,
+        String outputFileType
+    ) throws IOException {
+<span class="fc" id="L27">        SourceFileReaderFactory fileReaderFactory = new SourceFileReaderFactory();</span>
+<span class="fc" id="L28">		SourceFileReader fileReader = fileReaderFactory.createSourceFileReader(</span>
+<span class="fc" id="L29">			SourceFileLocation.valueOf(sourceFileLocation.toUpperCase()));</span>
+
+<span class="fc" id="L31">		SourceCodeAnalyzerFactory analyzerFactory = new SourceCodeAnalyzerFactory();</span>
+<span class="fc" id="L32">		SourceCodeAnalyzer analyzer = analyzerFactory.createSourceCodeAnalyzer(</span>
+<span class="fc" id="L33">			AnalyzingMethod.valueOf(sourceCodeAnalyzerType.toUpperCase()),</span>
+			fileReader,
+			filepath);
+<span class="fc" id="L36">		Map&lt;String, Integer&gt; metrics = analyzer.calculateMetrics();</span>
+	
+<span class="fc" id="L38">		MetricsExporterFactory exporterFactory = new MetricsExporterFactory();</span>
+<span class="fc" id="L39">		MetricsExporter exporter = exporterFactory.createMetricsExporter(</span>
+<span class="fc" id="L40">			FileType.valueOf(outputFileType.toUpperCase()));</span>
+<span class="fc" id="L41">		exporter.writeFile(metrics, outputFilePath);</span>
+<span class="fc" id="L42">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

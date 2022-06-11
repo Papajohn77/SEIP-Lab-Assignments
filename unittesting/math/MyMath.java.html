@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../jacoco-resources/report.gif" type="image/gif"/><title>MyMath.java</title><link rel="stylesheet" href="../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../index.html" class="el_report">Coverage Aggregator</a> &gt; <a href="../index.html" class="el_bundle">unittesting</a> &gt; <a href="index.source.html" class="el_package">math</a> &gt; <span class="el_source">MyMath.java</span></div><h1>MyMath.java</h1><pre class="source lang-java linenums">package math;
+
+/**
+* The MyMath provides simple methematical operations
+* that serve as hands-on practice on Unit Testing.
+*/
+<span class="fc" id="L7">public class MyMath {</span>
+
+    /**
+	 * Computes the factorial of a given integer number 0 &lt;= n &lt;= 12
+	 * @param n the number whose factorial we want to compute
+	 * @return the factorial of the number n
+	 * @exception IllegalArgumentException when n &lt; 0 or n &gt; 12
+	 */
+    public int factorial(int n) {
+<span class="fc bfc" id="L16" title="All 4 branches covered.">        if (n &lt; 0 || n &gt; 12) {</span>
+<span class="fc" id="L17">            throw new IllegalArgumentException(&quot;n should be 0 &lt;= n &lt;= 12&quot;);</span>
+        }
+
+<span class="fc bfc" id="L20" title="All 4 branches covered.">        if (n == 0 || n == 1) {</span>
+<span class="fc" id="L21">            return 1;</span>
+        }
+
+<span class="fc" id="L24">        return n * factorial(n - 1);</span>
+    }
+
+    /**
+	 * Checks if the given integer number is a prime number.
+	 * @param n the number we want to check if it is prime
+	 * @return true if n is a prime number else false
+	 * @exception IllegalArgumentException when n &lt; 2
+	 */
+    public boolean isPrime(int n) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (n &lt; 2) {</span>
+<span class="fc" id="L35">            throw new IllegalArgumentException(&quot;n should be &gt;= 2&quot;);</span>
+<span class="fc bfc" id="L36" title="All 4 branches covered.">        } else if (n == 2 || n == 3) {</span>
+<span class="fc" id="L37">            return true;</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        } else if (n % 2 == 0) {</span>
+<span class="fc" id="L39">            return false;</span>
+        }
+
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        for (int i = 3; i &lt; Math.sqrt(n) + 1; i += 2) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            if (n % i == 0)</span>
+<span class="fc" id="L44">                return false;</span>
+        }
+<span class="fc" id="L46">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
